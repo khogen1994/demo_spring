@@ -106,9 +106,9 @@
 		
 	<!-- Second block -->	
 		<div  class="col-sm-8" >
-			<div id="barghaph1" style="height: 300px;width: 100%; display: none"></div>
+			<div id="bargraph1" style="height: 300px;width: 100%; display: none"></div>
 			<div id="bargraph2" style="height: 300px;width: 100%; display: none"></div>
-			<div id="barghaph3" style="height: 300px;width: 100%; display: none"></div>
+			<div id="bargraph3" style="height: 300px;width: 100%; display: none"></div>
 			
 		</div>
 	</div>
@@ -172,6 +172,11 @@ document.getElementById("date").innerHTML = date;
 
 /*************************************************************/
  
+window.onload = function() {
+	
+	cmd();
+}
+
 
 function cmd(){
 	
@@ -179,33 +184,47 @@ function cmd(){
 	document.getElementById("chartcontainer2").style.display = "none";
 	document.getElementById("chartcontainer3").style.display = "none";
 	document.getElementById("chartcontainer1").style.display = "block";
-
-	var cmd_chart = new CanvasJS.Chart("chartcontainer1", {
+	
+	
+	
+	var cmdPie = new CanvasJS.Chart("chartcontainer1", {
+		theme: "light2", // "light1", "light2", "dark1", "dark2"
+		exportEnabled: true,
 		animationEnabled: true,
 		title: {
-			text: "Policies Status - 2018"
+			text: "Desktop Browser Market Share in 2016"
 		},
 		data: [{
 			type: "pie",
-			startAngle: 24,
-			yValueFormatString: "##0.00\"%\"",
-			indexLabel: "{label} {y}",
+			startAngle: 25,
+			toolTipContent: "<b>{label}</b>: {y}%",
+			showInLegend: "true",
+			legendText: "{label}",
+			indexLabelFontSize: 16,
+			indexLabel: "{label} - {y}%",
 			dataPoints: [
-				{y: 79.45, label: "Issued on time"},
-				{y: 17.31, label: "Issued late"},
-				{y: 3.24, label: "Others"}
+				{ y: 51.08, label: "Chrome" },
+				{ y: 27.34, label: "Internet Explorer" },
+				{ y: 10.62, label: "Firefox" },
+				{ y: 5.02, label: "Microsoft Edge" },
+				{ y: 4.07, label: "Safari" },
+				{ y: 1.22, label: "Opera" },
+				{ y: 0.44, label: "Others" }
 			]
 		}]
 	});
-	cmd_chart.render();
+	cmdPie.render();
+
 	
 	
-	//for plotting bargraph
-	document.getElementById("bargraph2").style.display="none";
-	document.getElementById("bargraph3").style.display="none";
-	document.getElementById("bargraph1").style.display="block";
 	
-	var cmd_graph = new CanvasJS.Chart("bargraph1", {
+	//for plotting barghaph
+	document.getElementById("bargraph3").style.display = "none";
+	document.getElementById("bargraph2").style.display = "none";
+	document.getElementById("bargraph1").style.display = "block";
+	
+	
+	var cmdBar = new CanvasJS.Chart("bargraph1", {
 		animationEnabled: true,
 		title:{
 			text: "Crude Oil Reserves vs Production, 2016"
@@ -261,7 +280,7 @@ function cmd(){
 			]
 		}]
 	});
-	cmd_graph.render();
+	cmdBar.render();
 
 	function toggleDataSeries(e) {
 		if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
@@ -270,7 +289,7 @@ function cmd(){
 		else {
 			e.dataSeries.visible = true;
 		}
-		cmd_graph.render();
+		cmdBar.render();
 	}
 
 	
@@ -278,76 +297,45 @@ function cmd(){
 
 
 
-
 function regManager(){
-	google.charts.load('current', {'packages':['corechart']});
 	
-	document.getElementById("chartcontainer1").style.display="none";
-	document.getElementById("chartcontainer3").style.display="none";
-	document.getElementById("chartcontainer2").style.display="block";
-		
-	
-	var data = new google.visualization.DataTable();
-	data.addColumn('string', 'status');
-	data.addColumn('number', 'No. of policies');
-	data.addRows([
-		['Issued on time',8],
-		['Issued late',3],
-		['Other issues',2]
-	]);
-	
-	//set chart options
-	var options = {'title':'Policy issued status','width':400,'height':300};
-	
-	//draw chart
-	var chart = new google.visualization.PieChart(document.getElementById("chartcontainer2"));
-	chart.draw(data,options);
+	//for plotting piechart
 	
 	
 	
-	//for plotting graph
-	document.getElementById("bargaph1").style.display="none";
-	document.getElementById("bargaph3").style.display="none";
-	document.getElementById("bargaph2").style.display="block";
+	//for plotting Bargraph
+	document.getElementById("bargraph1").style.display = "none";
+	document.getElementById("bargraph3").style.display = "none";
+	document.getElementById("bargraph2").style.display = "block";
 	
+	var regBar = new CanvasJS.Chart("bargraph2", {
+		animationEnabled: true,
+		theme: "light2", // "light1", "light2", "dark1", "dark2"
+		title:{
+			text: "Top Oil Reserves"
+		},
+		axisY: {
+			title: "Reserves(MMbbl)"
+		},
+		data: [{        
+			type: "column",  
+			showInLegend: true, 
+			legendMarkerColor: "grey",
+			legendText: "MMbbl = one million barrels",
+			dataPoints: [      
+				{ y: 300878, label: "Venezuela" },
+				{ y: 266455,  label: "Saudi" },
+				{ y: 169709,  label: "Canada" },
+				{ y: 158400,  label: "Iran" },
+				{ y: 142503,  label: "Iraq" },
+				{ y: 101500, label: "Kuwait" },
+				{ y: 97800,  label: "UAE" },
+				{ y: 80000,  label: "Russia" }
+			]
+		}]
+	});
+	regBar.render();
 	
-	 var data = new google.visualization.DataTable();
-     data.addColumn('timeofday', 'Time of Day');
-     data.addColumn('number', 'Motivation Level');
-
-     data.addRows([
-       [{v: [8, 0, 0], f: '8 am'}, 1],
-       [{v: [9, 0, 0], f: '9 am'}, 2],
-       [{v: [10, 0, 0], f:'10 am'}, 3],
-       [{v: [11, 0, 0], f: '11 am'}, 4],
-       [{v: [12, 0, 0], f: '12 pm'}, 5],
-       [{v: [13, 0, 0], f: '1 pm'}, 6],
-       [{v: [14, 0, 0], f: '2 pm'}, 7],
-       [{v: [15, 0, 0], f: '3 pm'}, 8],
-       [{v: [16, 0, 0], f: '4 pm'}, 9],
-       [{v: [17, 0, 0], f: '5 pm'}, 10],
-     ]);
-
-     var options = {
-       title: 'Motivation Level Throughout the Day',
-       hAxis: {
-         title: 'Time of Day',
-         format: 'h:mm a',
-         viewWindow: {
-           min: [7, 30, 0],
-           max: [15, 50, 0]
-         }
-       },
-       vAxis: {
-         title: 'Rating (scale of 1-10)'
-       }
-     };
-
-     var chart = new google.visualization.ColumnChart(
-       document.getElementById('bargraph2'));
-
-     chart.draw(data, options);
-   
 }
 
 
