@@ -7,6 +7,8 @@
 	<script type="text/javascript" src="resources/js/jquery.js"></script>
 	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+	
 	
 	<link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -108,7 +110,9 @@
 		<div  class="col-sm-8" >
 			<div id="bargraph1" style="height: 300px;width: 100%; display: none"></div>
 			<div id="bargraph2" style="height: 300px;width: 100%; display: none"></div>
-			<div id="bargraph3" style="height: 300px;width: 100%; display: none"></div>
+			<div id="bargraph3" style="height: 300px;width: 100%; display: none">
+				<canvas id="mychart" style="height: 100%; width: 100%"></canvas>
+			</div>
 			
 		</div>
 	</div>
@@ -300,7 +304,34 @@ function cmd(){
 function regManager(){
 	
 	//for plotting piechart
-	
+	document.getElementById("chartcontainer1").style.display = "none" ;
+	document.getElementById("chartcontainer3").style.display = "none";
+	document.getElementById("chartcontainer2").style.display = "block";
+	var regPie = new CanvasJS.Chart("chartcontainer2", {
+	animationEnabled: true,
+	title:{
+		text: "Email Categories",
+		horizontalAlign: "left"
+	},
+	data: [{
+		type: "doughnut",
+		startAngle: 60,
+		//innerRadius: 60,
+		indexLabelFontSize: 17,
+		indexLabel: "{label} - #percent%",
+		toolTipContent: "<b>{label}:</b> {y} (#percent%)",
+		dataPoints: [
+			{ y: 67, label: "Inbox" },
+			{ y: 28, label: "Archives" },
+			{ y: 10, label: "Labels" },
+			{ y: 7, label: "Drafts"},
+			{ y: 15, label: "Trash"},
+			{ y: 6, label: "Spam"}
+		]
+	}]
+});
+	regPie.render();
+
 	
 	
 	//for plotting Bargraph
@@ -335,6 +366,65 @@ function regManager(){
 		}]
 	});
 	regBar.render();
+	
+}
+
+
+
+function branchManager(){
+	document.getElementById("bargraph1").style.display = "none";
+	document.getElementById("bargraph2").style.display = "none";
+	document.getElementById("bargraph3").style.display = "block";
+	
+	//chart.js
+	// Our labels along the x-axis
+	var years = ["Jan '18","Feb '18","Mar '18","Apr '18","May '18","Jun '18","Jul '18","Aug '18","Sep '18","Oct '18"];
+	// For drawing the lines
+	var policy = [86,114,106,106,107,111,133,221,783,2478];
+	var ECIB = [282,350,411,502,635,809,947,1402,3700,5267];
+	var BUD = [168,170,178,190,203,276,408,547,675,734];
+	var CUD = [40,20,10,16,24,38,74,167,508,784];
+	var Reinsurance = [6,3,2,2,7,26,82,172,312,433];
+	
+	var ctx = document.getElementById("mychart");
+	var myChart = new Chart(ctx, {
+	  type: 'line',
+	  data: {
+	    labels: years,
+	    datasets: [
+	      { 
+	        data: policy,
+	        label: "Policy",
+	        borderColor: "#3e95cd",
+	        fill: false
+	      },
+	      { 
+	    	  data: ECIB,
+	    	  label: "ECIB",
+	    	  borderColor: "#8e5ea2",
+	    	  fill: false
+	    	},
+	    	{ 
+	    	  data: BUD,
+	    	  label: "BUD",
+	    	  borderColor: "#3cba9f",
+	    	  fill: false
+	    	},
+	    	{ 
+	    	  data: CUD,
+	    	  label: "CUD",
+	    	  borderColor: "#e8c3b9",
+	    	  fill: false
+	    	},
+	    	{ 
+	    	  data: Reinsurance,
+	    	  label: "Reinsurance",
+	    	  borderColor: "#c45850",
+	    	  fill: false
+	    	}
+	    ]
+	  }
+	});
 	
 }
 
