@@ -100,7 +100,9 @@
 		<div class="col-sm-4 p-2">
 			<div id="chartcontainer1" style="height: 300px; width: 100%; display: none" ></div>
 			<div id="chartcontainer2" style="height: 300px; width: 100%; display: none" ></div>
-			<div id="chartcontainer3" style="height: 300px; width: 100%; display: none" ></div>
+			<div id="chartcontainer3" style="height: 300px; width: 100%; display: none" >
+				<canvas id = "piechart" style="height : 100%; width : 100%"></canvas>
+			</div>
 		</div>
 		
 		
@@ -231,22 +233,22 @@ function cmd(){
 	var cmdBar = new CanvasJS.Chart("bargraph1", {
 		animationEnabled: true,
 		title:{
-			text: "Crude Oil Reserves vs Production, 2016"
+			text: "ECIB vs Policy"
 		},	
 		axisY: {
-			title: "Billions of Barrels",
+			title: "INR in crores",
 			titleFontColor: "#4F81BC",
 			lineColor: "#4F81BC",
 			labelFontColor: "#4F81BC",
 			tickColor: "#4F81BC"
-		},
+		},/*
 		axisY2: {
 			title: "Millions of Barrels/day",
 			titleFontColor: "#C0504E",
 			lineColor: "#C0504E",
 			labelFontColor: "#C0504E",
 			tickColor: "#C0504E"
-		},	
+		},*/	
 		toolTip: {
 			shared: true
 		},
@@ -256,31 +258,38 @@ function cmd(){
 		},
 		data: [{
 			type: "column",
-			name: "Proven Oil Reserves (bn)",
-			legendText: "Proven Oil Reserves",
+			name: "ECIB income",
+			legendText: "ECIB income",
 			showInLegend: true, 
 			dataPoints:[
-				{ label: "Saudi", y: 266.21 },
-				{ label: "Venezuela", y: 302.25 },
-				{ label: "Iran", y: 157.20 },
-				{ label: "Iraq", y: 148.77 },
-				{ label: "Kuwait", y: 101.50 },
-				{ label: "UAE", y: 97.8 }
+				{ label: "Feb '18", y: 234.25},
+				{ label: "March '18", y: 432.5},
+				{ label: "April '18", y: 322.32},
+				{ label: "May '18", y: 213.2},
+				{ label: "June '18", y: 266.21 },
+				{ label: "July '18", y: 302.25 },
+				{ label: "Aug '18", y: 157.20 },
+				{ label: "Sept '18", y: 148.77 },
+				{ label: "Oct '18", y: 101.50 },
+				{ label: "Nov '18", y: 97.8 }
 			]
 		},
 		{
 			type: "column",	
-			name: "Oil Production (million/day)",
-			legendText: "Oil Production",
-			axisYType: "secondary",
+			name: "Policy income",
+			legendText: "Policy income",
 			showInLegend: true,
 			dataPoints:[
-				{ label: "Saudi", y: 10.46 },
-				{ label: "Venezuela", y: 2.27 },
-				{ label: "Iran", y: 3.99 },
-				{ label: "Iraq", y: 4.45 },
-				{ label: "Kuwait", y: 2.92 },
-				{ label: "UAE", y: 3.1 }
+				{ label: "Feb '18", y: 563.2},
+				{ label: "March '18", y: 135.5},
+				{ label: "April '18", y: 342.9},
+				{ label: "May '18", y: 123.74},
+				{ label: "June '18", y: 100.46 },
+				{ label: "July '18", y: 200.27 },
+				{ label: "Aug '18", y: 300.99 },
+				{ label: "Sept '18", y: 400.45 },
+				{ label: "Oct '18", y: 200.92 },
+				{ label: "Nov '18", y: 300.1 }
 			]
 		}]
 	});
@@ -343,25 +352,25 @@ function regManager(){
 		animationEnabled: true,
 		theme: "light2", // "light1", "light2", "dark1", "dark2"
 		title:{
-			text: "Top Oil Reserves"
+			text: "Branch wise income"
 		},
 		axisY: {
-			title: "Reserves(MMbbl)"
+			title: "Income in crores"
 		},
 		data: [{        
 			type: "column",  
 			showInLegend: true, 
 			legendMarkerColor: "grey",
-			legendText: "MMbbl = one million barrels",
+			legendText: "Branchwise income in crores",
 			dataPoints: [      
-				{ y: 300878, label: "Venezuela" },
-				{ y: 266455,  label: "Saudi" },
-				{ y: 169709,  label: "Canada" },
-				{ y: 158400,  label: "Iran" },
-				{ y: 142503,  label: "Iraq" },
-				{ y: 101500, label: "Kuwait" },
-				{ y: 97800,  label: "UAE" },
-				{ y: 80000,  label: "Russia" }
+				{ y: 300878, label: "Branch 1" },
+				{ y: 266455,  label: "Branch 2" },
+				{ y: 169709,  label: "Branch 3" },
+				{ y: 158400,  label: "Branch 4" },
+				{ y: 142503,  label: "Branch 5" },
+				{ y: 101500, label: "Branch 6" },
+				{ y: 97800,  label: "Branch 7" },
+				{ y: 80000,  label: "Branch 8" }
 			]
 		}]
 	});
@@ -370,8 +379,20 @@ function regManager(){
 }
 
 
-
+/*****                      USING CHART.JS                   ****/
 function branchManager(){
+	
+	
+	//for plotting pie chart
+	document.getElementById("chartcontainer1").style.display = "none";
+	document.getElementById("chartcontainer2").style.display = "none";
+	document.getElementById("chartcontainer3").style.display = "block";
+	
+	
+	
+	
+	
+	//for plotting bar graph
 	document.getElementById("bargraph1").style.display = "none";
 	document.getElementById("bargraph2").style.display = "none";
 	document.getElementById("bargraph3").style.display = "block";
