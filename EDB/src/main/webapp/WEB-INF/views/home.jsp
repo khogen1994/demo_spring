@@ -120,6 +120,13 @@
 	</div>
 	
 	
+	<!-- query selector -->
+	<div class="row">
+	
+	
+	</div>
+	
+	
 	<div class="row" style="height: 400px">
 		<div class="col-sm-12 p-2">
 		
