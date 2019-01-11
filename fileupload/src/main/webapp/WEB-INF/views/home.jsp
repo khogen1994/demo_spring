@@ -6,9 +6,17 @@
 </head>
 <body>
 	<form method="POST" action="uploadFile" enctype="multipart/form-data">
-		File to upload: <input type="file" name="file"><br /> 
-		Name: <input type="text" name="name"><br /> <br /> 
-		<input type="submit" value="Upload"> Press here to upload the file!
+
+
+		<select name="dept">
+			<option value="ECIB">ECIB</option>
+			<option value="Policy">Policy</option>
+			<option value="PEB">PEB</option>
+			<option value="BUD">BUD</option>
+		</select> <br/>
+		File to upload: <input type="file" name="file" ><br /> 
+		Name: <input type="text" name="name"><br /> <br />
+		<input type="submit" value="Upload" > Press here to upload the file!
 	</form>	
 
 
