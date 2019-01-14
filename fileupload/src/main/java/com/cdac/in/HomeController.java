@@ -46,18 +46,21 @@ public class HomeController {
 	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
 	public @ResponseBody
 	String uploadFileHandler(@RequestParam("name") String name,
-			@RequestParam("file") MultipartFile file) {
+			@RequestParam("file") MultipartFile file, @RequestParam("dept") String dept, @RequestParam("srno") String srno,
+			@RequestParam("doctype") String doctype) {
 
 		if (!file.isEmpty()) {
 			try {
 				byte[] bytes = file.getBytes();
-
+				System.out.println(file.getContentType());
 				// Creating the directory to store file
 				String rootPath = System.getProperty("catalina.home");
-				File dir = new File(rootPath + File.separator + "tmpFiles");
+				
+				File dir = new File(rootPath + File.separator + "tmpFiles" + File.separator + dept + File.separator + srno + File.separator + doctype);
 				if (!dir.exists())
 					dir.mkdirs();
 
+				
 				// Create the file on server
 				File serverFile = new File(dir.getAbsolutePath()
 						+ File.separator + name + ".pdf");
