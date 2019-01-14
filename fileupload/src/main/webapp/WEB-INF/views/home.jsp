@@ -48,10 +48,10 @@
 					<td>Dept</td>
 					<td>
 						<select name = "dept">
-						<option value="ECIB"></option>
-						<option value="Policy"></option>
-						<option value="BUD"></option>
-						<option value="PEB"></option>
+						<option value="ECIB">ECIB</option>
+						<option value="Policy">Policy</option>
+						<option value="BUD">BUD</option>
+						<option value="PEB">PEB</option>
 						</select>
 					</td>
 				</tr>
@@ -81,13 +81,27 @@
 						<input type="file" name="file">
 					</td>
 				</tr>
+				
+				<tr>
+					<td>Enter name</td>
+					<td>
+						<input type="text" name="name">
+					</td>
+				</tr>
 			</tbody>
 		
 		</table>
+		
+		<div class="col-sm-2"></div>
+		<div class="col-sm-2">
+			<input type="submit" value="Upload" class="btn btn-success">
+		</div>
 		</div>
 		</div>
 		
-
+		
+		
+	
 	
 	</form>	
 </div>	
