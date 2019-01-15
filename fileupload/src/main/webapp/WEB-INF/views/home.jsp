@@ -11,6 +11,29 @@
 
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+
+/* 	function ajaxcall(){
+		var httpRequest = new XMLHttpRequest();
+		var filename = $("#newfile").val();
+	    httpRequest.open('GET', "${pageContext.request.contextPath}/Uploadajax.html?filename="+filename);
+	    httpRequest.send();
+	    return httpRequest.responseText;
+	}
+  */
+
+ 
+ /* function ajaxcall()
+ {
+	 var name=$('#newfile').val();
+	 console.log(name)
+ } */
+	
+	
+	
+
+</script>
+
 </head>
 <body>
 <div class="container">
@@ -96,6 +119,7 @@
 		<div class="col-sm-2">
 			<input type="submit" value="Upload" class="btn btn-success">
 		</div>
+	
 		</div>
 		</div>
 		
@@ -104,6 +128,12 @@
 	
 	
 	</form>	
+	
+		<!-- <div class="col-sm-2">
+			<button type="submit" value="Upload" class="btn btn-success">
+			<button onclick="ajaxcall()">submit</button><input type="file" name="doc" id="newfile">
+		</div>
+		 -->
 </div>	
 
 </body>

@@ -44,10 +44,9 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
-	public @ResponseBody
 	String uploadFileHandler(@RequestParam("name") String name,
 			@RequestParam("file") MultipartFile file, @RequestParam("dept") String dept, @RequestParam("srno") String srno,
-			@RequestParam("doctype") String doctype) {
+			@RequestParam("doctype") String doctype, Model model) {
 
 		if (!file.isEmpty()) {
 			try {
@@ -71,17 +70,35 @@ public class HomeController {
 
 				logger.info("Server File Location="
 						+ serverFile.getAbsolutePath());
-
-				return "You successfully uploaded file=" + name;
+				
+				model.addAttribute("filepath", serverFile.getAbsolutePath());
+				
+				return "success";
 			} catch (Exception e) {
-				return "You failed to upload " + name + " => " + e.getMessage();
+				/*return "You failed to upload " + name + " => " + e.getMessage();*/
+				model.addAttribute("errormsg",e.getMessage());
+				return "error";
 			}
 		} else {
-			return "You failed to upload " + name
-					+ " because the file was empty.";
+			/*return "You failed to upload " + name
+					+ " because the file was empty.";*/
+			model.addAttribute("errormsg", "upload failed"+ name + "is empty");
+			return "error";
 		}
 	} 
 	
+	/*
+	//ajax
+	
+	
+	@RequestMapping(value="/Uploadajax.html", method=RequestMethod.GET)
+	@ResponseBody String uploadfile(@RequestParam("filename") MultipartFile file)
+     {
+		
+		System.out.println(file.getContentType());
+		return "succes";
+     }*/
+ 
 	
 	/**
 	 * Upload multiple file using Spring Controller
