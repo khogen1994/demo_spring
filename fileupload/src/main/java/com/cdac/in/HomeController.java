@@ -96,7 +96,7 @@ public class HomeController {
      {
 		
 		System.out.println(file.getContentType());
-		return "succes";
+		return "success";
      }*/
  
 	
