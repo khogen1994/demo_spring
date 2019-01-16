@@ -63,7 +63,7 @@
 		<div class="row">
 		<div class="col-sm-3"></div>
 		<div class="col-sm-6">
-		<table class="table">
+		<table class="table table-hover">
 			<thead></thead>
 			
 			<tbody>
@@ -71,10 +71,10 @@
 					<td>Dept</td>
 					<td>
 						<select name = "dept">
-						<option value="ECIB">ECIB</option>
-						<option value="Policy">Policy</option>
-						<option value="BUD">BUD</option>
-						<option value="PEB">PEB</option>
+						<option value="ecib">ECIB</option>
+						<option value="policy">Policy</option>
+						<option value="bud">BUD</option>
+						<option value="peb">PEB</option>
 						</select>
 					</td>
 				</tr>
@@ -105,12 +105,12 @@
 					</td>
 				</tr>
 				
-				<tr>
+				<!-- <tr>
 					<td>Enter name</td>
 					<td>
 						<input type="text" name="name">
 					</td>
-				</tr>
+				</tr> -->
 			</tbody>
 		
 		</table>

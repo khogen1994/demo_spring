@@ -44,7 +44,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
-	String uploadFileHandler(@RequestParam("name") String name,
+	String uploadFileHandler(/*@RequestParam("name") String name,*/
 			@RequestParam("file") MultipartFile file, @RequestParam("dept") String dept, @RequestParam("srno") String srno,
 			@RequestParam("doctype") String doctype, Model model) {
 
@@ -52,8 +52,13 @@ public class HomeController {
 			try {
 				byte[] bytes = file.getBytes();
 				System.out.println(file.getContentType());
+				File nfile = (File) file;
+				
 				// Creating the directory to store file
 				String rootPath = System.getProperty("catalina.home");
+				
+				
+				
 				
 				File dir = new File(rootPath + File.separator + "tmpFiles" + File.separator + dept + File.separator + srno + File.separator + doctype);
 				if (!dir.exists())
@@ -61,8 +66,9 @@ public class HomeController {
 
 				
 				// Create the file on server
+				String fname = dept+"_"+srno+"_"+doctype;		//creating filename
 				File serverFile = new File(dir.getAbsolutePath()
-						+ File.separator + name + ".pdf");
+						+ File.separator + fname + ".pdf");
 				BufferedOutputStream stream = new BufferedOutputStream(
 						new FileOutputStream(serverFile));
 				stream.write(bytes);
@@ -80,9 +86,9 @@ public class HomeController {
 				return "error";
 			}
 		} else {
-			/*return "You failed to upload " + name
-					+ " because the file was empty.";*/
-			model.addAttribute("errormsg", "upload failed"+ name + "is empty");
+		/*	return "You failed to upload " + name
+					+ " because the file was empty.";
+			model.addAttribute("errormsg", "upload failed"+ fname + "is empty");*/
 			return "error";
 		}
 	} 
